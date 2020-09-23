@@ -5,4 +5,4 @@ CREATE TABLE quetions (
     created_at TIMESTAMP
 );
 
-insert into book_db.posts (title, content) values ('hoge', 'hogehoge');
+insert into collectq_db.posts (title, content) values ('hoge', 'hogehoge');

@@ -1,4 +1,4 @@
-use book_db;
+use collectq_db;
 
 CREATE TABLE hello (
     message VARCHAR(64)

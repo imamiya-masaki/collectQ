@@ -19,6 +19,6 @@ func ApiRegistQuetion(c *gin.Context) {
 		println(err)
 	}
 	println("req", req)
-	req.RegistBook(database.GetDB())
+	req.CreateQuetion(database.GetDB())
 	c.JSON(200, req)
 }
