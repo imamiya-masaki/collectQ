@@ -11,7 +11,7 @@ ROOTPASS=root
 ### コンテナの生成と起動
 ```
 $ docker-compose build
-$ docker-compose up -d
+$ docker-compose up
 ```
 
 ## ログの確認
