@@ -36,5 +36,6 @@ func main() {
 		c.JSON(200, "Hello, World")
 	})
 	r.GET("/quetions", handler.ApiGetAllQuetions)
+	r.POST("create/quetion", handler.ApiRegistQuetion)
 	r.Run()
 }

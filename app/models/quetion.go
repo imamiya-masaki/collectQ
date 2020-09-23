@@ -9,7 +9,7 @@ type Quetion struct {
 	created_at int    `json:"created_at"`
 }
 
-func getAllQuetion(db *gorm.DB) []Quetion {
+func GetAllQuetion(db *gorm.DB) []Quetion {
 	var quetions []Quetion
 	db.Find(&quetions)
 	return quetions

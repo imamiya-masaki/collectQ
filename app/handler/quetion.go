@@ -8,7 +8,7 @@ import (
 )
 
 func ApiGetAllQuetions(c *gin.Context) {
-	posts := models.getAllQuetion(database.GetDB())
+	posts := models.GetAllQuetion(database.GetDB())
 	c.JSON(200, posts)
 }
 
