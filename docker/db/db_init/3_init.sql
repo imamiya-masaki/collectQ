@@ -1,8 +1,10 @@
 CREATE TABLE quetions (
     id int auto_increment not null primary key, 
-    title varchar(32), 
-    content varchar(256),
-    created_at TIMESTAMP
+    title VARCHAR(32), 
+    content VARCHAR(256)
 );
 
-insert into collectq_db.posts (title, content) values ('hoge', 'hogehoge');
+CREATE TABLE quetionIds (
+    id int auto_increment not null primary key, 
+    titleid int
+);

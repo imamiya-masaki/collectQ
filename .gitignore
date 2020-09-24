@@ -4,8 +4,6 @@
 
 ./docker/db/db_data
 
-book-rec-key.pem
-
 docker-compose.ecs.yml
 
 ecs-params.yml

@@ -9,6 +9,7 @@ import (
 
 func ApiGetAllQuetions(c *gin.Context) {
 	posts := models.GetAllQuetion(database.GetDB())
+	println("確認！！AA", posts)
 	c.JSON(200, posts)
 }
 
@@ -21,4 +22,9 @@ func ApiRegistQuetion(c *gin.Context) {
 	println("req", req)
 	req.CreateQuetion(database.GetDB())
 	c.JSON(200, req)
+}
+
+func ApiGetQuetion(c *gin.Context) {
+	posts := models.GetQuetion(database.GetDB())
+	c.JSON(200, posts)
 }
