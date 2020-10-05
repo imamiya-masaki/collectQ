@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -23,10 +23,14 @@ func Init() {
 	USERNAME := os.Getenv("USERNAME")
 	USERPASS := os.Getenv("USERPASS")
 
+	// mysql
 	// dsn := "docker:docker@tcp(mysql:3306)/collectq_db?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := USERNAME + ":" + USERPASS + "@tcp(mysql:3306)/" + DATABASE + "?charset=utf8mb4&parseTime=True&loc=Local"
+	// dsn := USERNAME + ":" + USERPASS + "@tcp(mysql:3306)/" + DATABASE + "?charset=utf8mb4&parseTime=True&loc=Local"
+
+	// postgreSQL
+	dsn := "user=" + USERNAME + " password=" + USERPASS + " dbname=" + DATABASE + " port=9920 sslmode=disable TimeZone=Asia/Tokyo"
 	println("dsn", dsn)
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		println(err)
 	} else {

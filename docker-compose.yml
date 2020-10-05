@@ -1,26 +1,29 @@
 version: '3'
 
 services:
-    mysql:
+    postgres:
+        # image: postgres:12.1
         build:
             context: ./docker/db
         container_name: collectq_db
         environment:
-            MYSQL_DATABASE: ${DATABASE}
-            MYSQL_USER: ${USERNAME}
-            MYSQL_PASSWORD: ${USERPASS}
-            MYSQL_ROOT_PASSWORD: ${ROOTPASS}
+            POSTGRES_DATABASE: ${DATABASE}
+            POSTGRES_USER: ${USERNAME}
+            POSTGRES_PASSWORD: ${USERPASS}
+            POSTGRES_ROOT_PASSWORD: ${ROOTPASS}
         ports:
             - '3306:3306'
         volumes:
             # 初期化よう
             - ./docker/db/db_init:/docker-entrypoint-initdb.d
             # 永続化よう
-            # - ./docker/db/db_data:/var/lib/mysql
+            # - ./docker/db/db_data:/var/lib/postgresql/data
         networks:
-            - default
+            ecs-network:
+                ipv4_address: 172.30.0.2
             
     golang:
+        # image: golang:1.14.2-alpine
         build:
             context: ./docker/api
         container_name: collectq_api
@@ -31,5 +34,22 @@ services:
         working_dir: /go/src/app
         tty: true
         depends_on:
-            - mysql
+            - postgres
         command: go run main.go
+        networks:
+            ecs-network:
+                ipv4_address: 172.30.0.3
+        # logging:
+        #     driver: awslogs
+        #     options: 
+        #         awslogs-group: /ecs/collectq
+        #         awslogs-region: ap-northeast-1
+        #         awslogs-stream-prefix: golang
+
+networks:
+    ecs-network:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 172.30.0.0/24

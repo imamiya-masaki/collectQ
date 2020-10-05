@@ -4,12 +4,14 @@ import (
 	"app/database"
 	"app/handler"
 	"fmt"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	fmt.Println("起動!!!")
 	database.Init()
 
 	r := gin.Default()
@@ -40,7 +42,7 @@ func main() {
 	r.GET("/posts", GetPost)
 	r.GET("/quetions/:id", handler.ApiGetQuetion)
 	r.POST("create/quetion", handler.ApiRegistQuetion)
-	r.Run()
+	r.Run(":" + os.Getenv("PORT"))
 }
 
 type Post struct {
